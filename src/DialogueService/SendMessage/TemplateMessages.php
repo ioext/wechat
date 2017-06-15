@@ -366,6 +366,4 @@ class TemplateMessage
 
         return $nErrCode;
     }
-
-
 }
