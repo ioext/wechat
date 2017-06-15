@@ -1,14 +1,14 @@
 {
-  "name": "ZKXTriumph/wechat",
+  "name": "zkxtriumph/wechat",
   "description": "PHP Library",
   "keywords": ["library", "wechat","oauth"],
   "license": "MIT",
   "type": "library",
-  "homepage": "https://github.com/ZKXTriumph",
+  "homepage": "https://github.com/zkxtriumph",
   "authors": [
     {
-      "name": "ZKXTriumph",
-      "email": "ZKXTriumph@gmail.com"
+      "name": "zkxtriumph",
+      "email": "zkxtriumph@gmail.com"
     }
   ],
   "require": {
