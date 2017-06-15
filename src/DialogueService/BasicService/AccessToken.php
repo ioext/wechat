@@ -1,15 +1,20 @@
 <?php
 namespace pcappp\wechat\DialogueService\BasicService;
 
-
 use dekuan\delib\CLib;
 use dekuan\vdata\CConst;
-use pcappp\wechat\WeChatConst;
+use wechat\WeChatConst;
 
 class AccessToken
 {
-    //get Access Token by Code Url
-    const GET_ACCESS_TOKEN_BY_CODE_URL = " https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=%s";
+    //get Access Token by Code url
+    const GET_ACCESS_TOKEN_BY_CODE_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+
+    //test Access Token is valid Url
+    const TEST_ACCESS_TOKEN_IS_VALID_URL = "https://api.weixin.qq.com/sns/auth?access_token=%s&openid=%s";
+
+    //refresh access token url
+    const REFRESH_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%s&grant_type=refresh_token&refresh_token=%s";
 
     private $m_sAppId;
     private $m_sAppSecret;
@@ -22,11 +27,10 @@ class AccessToken
      * @param $sAppSecret
      * @param string $sGrantType
      */
-    public function __construct( $sAppId, $sAppSecret, $sGrantType = "authorization_code" )
+    public function __construct( $sAppId, $sAppSecret )
     {
         $this->m_sAppId     =   $sAppId;
         $this->m_sAppSecret =   $sAppSecret;
-        $this->m_sGrantType =   $sGrantType;
     }
 
 
@@ -34,11 +38,11 @@ class AccessToken
      * get access token by code
      *
      * @param string $sCode
-     * @param array $arrTokenDate
+     * @param array $arrTokenData
      * @param string $sDesc
      * @return int
      */
-    public function GetAccessToken( $sCode = '', & $arrTokenDate = [], & $sDesc = 'unknown error' )
+    public function GetAccessToken( $sCode = '', & $arrAccessTokenData = [], & $sDesc = 'unknown error' )
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
@@ -46,9 +50,12 @@ class AccessToken
         {
            $sAccessTokenUrl = sprintf( self::GET_ACCESS_TOKEN_BY_CODE_URL, $this->m_sAppId, $this->m_sAppSecret, $sCode, $this->m_sGrantType );
 
-            $arrTokenData = (array)json_decode(file_get_contents($sAccessTokenUrl), TRUE);
+            $arrAccessTokenData = (array)json_decode(file_get_contents($sAccessTokenUrl), TRUE);
 
-            if( CLib::IsExistingString(   CLib::GetVal( $arrTokenData, 'access_token',false,'') ) && CLib::IsExistingString(   CLib::GetVal( $arrTokenData, 'openid',false,'') ) )
+            if( CLib::IsArrayWithKeys( $arrAccessTokenData )
+                && CLib::IsExistingString(   CLib::GetVal( $arrAccessTokenData, 'access_token',false,'') )
+                && CLib::IsExistingString(   CLib::GetVal( $arrAccessTokenData, 'openid',false,'') )
+            )
             {
                 $nErrCode = CConst::ERROR_SUCCESS;
                 $sDesc = "get access token success";
@@ -68,93 +75,85 @@ class AccessToken
         return $nErrCode;
     }
 
-
-
-    //获取
-    //刷新
-    //验证
-
-
     /**
-     * 刷新 access_token
+     * test access token is valid
+     *
+     * @param $sAccessToken
+     * @param $sOpenId
+     * @param string $sDesc
+     * @return int
      */
-    const REFRESH = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
-    /**
-     * 检测 access_token 是否有效
-     */
-    const IS_VALID = 'https://api.weixin.qq.com/sns/auth';
-    /**
-     * 网页授权获取用户信息
-     */
-    const USERINFO = 'https://api.weixin.qq.com/sns/userinfo';
-    /**
-     * 用户 access_token 和公众号是一一对应的
-     */
-    protected $appid;
-    /**
-     * 构造方法
-     */
-
-    /**
-     * 公众号 appid
-     */
-    public function getAppid()
+    public function TestAccessTokenIsValid( $sAccessToken, $sOpenId, & $bIsValid = false, & $sDesc = "unknown error" )
     {
-        return $this->appid;
-    }
-    /**
-     * 获取用户信息
-     */
-    public function getUser($lang = 'zh_CN')
-    {
-        if( !$this->isValid() ) {
-            $this->refresh();
+        $nErrCode = CConst::ERROR_UNKNOWN;
+
+        if( CLib::IsExistingString( $sAccessToken ) || CLib::IsExistingString( $sOpenId ) )
+        {
+            $sIsValidAccessTokenUrl = sprintf( self::TEST_ACCESS_TOKEN_IS_VALID_URL, $sAccessToken, $sOpenId );
+            $arrIsValidRet = (array)json_decode(file_get_contents($sIsValidAccessTokenUrl), TRUE);
+
+            if( CLib::IsArrayWithKeys( $arrIsValidRet )
+                && CLib::IsExistingString( CLib::GetVal( $arrIsValidRet, 'errmsg', false, '' ) )
+                && CLib::IsExistingString( CLib::GetVal( $arrIsValidRet, 'errcode', false, '' ) )
+                && CLib::GetVal( $arrIsValidRet, 'errmsg', false, '' ) === "ok"
+                && CLib::GetVal( $arrIsValidRet, 'errcode', false, '' ) == 0
+            )
+            {
+                $nErrCode = CConst::ERROR_SUCCESS;
+                $bIsValid = true;
+                $sDesc    = "the access token is valid";
+            }
+            else
+            {
+                $nErrCode = WeChatConst::TEST_ACCESS_TOKEN_IS_VALID_ERROR;
+                $sDesc = "the access token is not valid";
+            }
         }
-        $query = array(
-            'access_token'  => $this['access_token'],
-            'openid'        => $this['openid'],
-            'lang'          => $lang
-        );
-        $response = Http::request('GET', static::USERINFO)
-            ->withQuery($query)
-            ->send();
-        if( $response['errcode'] != 0 ) {
-            throw new \Exception($response['errmsg'], $response['errcode']);
+        else
+        {
+            $nErrCode = WeChatConst::TEST_ACCESS_TOKEN_IS_VALID_PARAM_ERROR;
+            $sDesc = "TestAccessTokenIsValid param [access_token,openid] is not string";
         }
-        return $response;
+
+        return $nErrCode;
     }
+
     /**
-     * 刷新用户 access_token
+     * refresh access token
+     *
+     * @param $sAccessToken
+     * @param array $arrAccessTokenData
+     * @param string $sDesc
+     * @return int
      */
-    public function refresh()
+    public function RefreshAccessToken( $sAccessToken, & $arrAccessTokenData = [], & $sDesc = "unknown error" )
     {
-        $query = array(
-            'appid'         => $this->appid,
-            'grant_type'    => 'refresh_token',
-            'refresh_token' => $this['refresh_token']
-        );
-        $response = Http::request('GET', static::REFRESH)
-            ->withQuery($query)
-            ->send();
-        if( $response['errcode'] != 0 ) {
-            throw new \Exception($response['errmsg'], $response['errcode']);
-        }
-        // update new access_token from ArrayCollection
-        parent::__construct($response->toArray());
-        return $this;
-    }
-    /**
-     * 检测用户 access_token 是否有效
-     */
-    public function isValid()
-    {
-        $query = array(
-            'access_token'  => $this['access_token'],
-            'openid'        => $this['openid']
-        );
-        $response = Http::request('GET', static::IS_VALID)
-            ->withQuery($query)
-            ->send();
-        return ($response['errmsg'] === 'ok');
+        $nErrCode = CConst::ERROR_UNKNOWN;
+
+       if( CLib::IsExistingString( $sAccessToken ) )
+       {
+           $sRefreshTokenUrl =  sprintf( self::REFRESH_ACCESS_TOKEN_URL, $this->m_sAppId, $sAccessToken );
+           $arrAccessTokenData = (array)json_decode(file_get_contents($sRefreshTokenUrl), TRUE);
+
+           if( CLib::IsArrayWithKeys( $arrAccessTokenData )
+               && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenData, 'access_token',false,'') )
+               && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenData, 'openid',false,'') )
+           )
+           {
+               $nErrCode = CConst::ERROR_SUCCESS;
+               $sDesc = "refresh access token success";
+           }
+           else
+           {
+               $nErrCode = WeChatConst::REFRESH_ACCESS_TOKEN_ERROR;
+               $sDesc = "refresh access token error";
+           }
+       }
+       else
+       {
+            $nErrCode = WeChatConst::REFRESH_ACCESS_TOKEN_PARAM_ERROR;
+            $sDesc = "refresh access token param [ access_token ] error";
+       }
+       return $nErrCode;
     }
 }
