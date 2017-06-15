@@ -1,0 +1,1 @@
+#本服务是根据微信公众及开放平台测试的文档接口权限接口开发的,对应目录结构及为文档结构,请参考[微信公众平台](https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index)
