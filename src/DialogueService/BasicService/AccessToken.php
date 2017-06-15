@@ -33,7 +33,6 @@ class AccessToken
         $this->m_sAppSecret =   $sAppSecret;
     }
 
-
     /**
      * get access token by code
      *
