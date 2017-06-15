@@ -1,10 +1,10 @@
 {
-  "name": "ZKXTriumph/wechat",
+  "name": "pcappp/wechat",
   "description": "PHP Library",
   "keywords": ["library", "wechat","oauth"],
   "license": "MIT",
   "type": "library",
-  "homepage": "https://github.com/ZKXTriumph",
+  "homepage": "https://github.com/pcappp",
   "authors": [
     {
       "name": "ZKXTriumph",
