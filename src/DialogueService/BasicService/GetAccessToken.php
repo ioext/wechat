@@ -5,7 +5,7 @@ use dekuan\delib\CLib;
 use dekuan\vdata\CConst;
 use zkxtriumph\wechat\WeChatConst;
 
-class AccessToken
+class GetAccessToken
 {
     //get Access Token api Url
     const GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
@@ -85,7 +85,7 @@ class AccessToken
         {
            $sAccessTokenUrl = sprintf( self::GET_ACCESS_TOKEN_BY_CODE_URL, $this->m_sAppId, $this->m_sAppSecret, $sCode);
 
-            $arrAccessTokenRet = (array)json_decode(file_get_contents($sAccessTokenUrl), TRUE);
+            $arrAccessTokenRet = (array)json_decode( file_get_contents($sAccessTokenUrl), TRUE);
 
             if( CLib::IsArrayWithKeys( $arrAccessTokenRet )
                 && CLib::IsExistingString(   CLib::GetVal( $arrAccessTokenRet, 'access_token',false,'') )
