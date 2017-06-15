@@ -4,7 +4,6 @@ namespace zkxtriumph\wechat\DialogueService\BasicService;
 use dekuan\delib\CLib;
 use dekuan\vdata\CConst;
 use dekuan\vdata\CRequest;
-use Symfony\Component\HttpFoundation\Request;
 use zkxtriumph\wechat\WeChatConst;
 
 class TemplateMessage
@@ -13,22 +12,22 @@ class TemplateMessage
     const CONST_REQUEST_TIME_OUT = 20;
 
     //设置所属行业
-    const SET_INDUSTRY_URL = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry";
+    const SET_INDUSTRY_URL      = "https://api.weixin.qq.com/cgi-bin/template/api_set_industry";
 
     //获取设置的行业信息
     const GET_INDUSTRY_INFO_URL = "https://api.weixin.qq.com/cgi-bin/template/get_industry?access_token=%s";
 
     //获取模板ID
-    const GET_TEMPLATE_ID_URL = "https://api.weixin.qq.com/cgi-bin/template/api_add_template";
+    const GET_TEMPLATE_ID_URL   = "https://api.weixin.qq.com/cgi-bin/template/api_add_template";
 
     //获取模板列表
     const GET_TEMPLATE_LIST_URL = "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=%s";
 
     //删除模板
-    const DEL_TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/template/del_private_template";
+    const DEL_TEMPLATE_URL      = "https://api.weixin.qq.com/cgi-bin/template/del_private_template";
 
 
-    public function __construct( $sAppId = '' ){}
+    public function __construct(){}
 
     /**
      * 设置所属行业
@@ -366,7 +365,6 @@ class TemplateMessage
         }
 
         return $nErrCode;
-
     }
 
 
