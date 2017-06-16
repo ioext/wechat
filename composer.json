@@ -1,7 +1,7 @@
 {
   "name": "zkxtriumph/wechat",
   "description": "PHP Library",
-  "keywords": ["library", "wechat","oauth"],
+  "keywords": ["library", "wechat","oauth","pay","other","微信","微信登录","微信支付"],
   "license": "MIT",
   "type": "library",
   "homepage": "https://github.com/zkxtriumph",

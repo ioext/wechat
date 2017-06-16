@@ -38,22 +38,20 @@ class GetAccessToken
     /**
      * get access token
      *
-     * If you want to see official return information, see parameters $arrAccessTokenData
+     * If you want to see official return information, see parameters $arrRet
      *
-     * @param array $arrAccessTokenRet[ only return access_token ]
+     * @param array $arrRet[ only return access_token ]
      * @param string $sDesc
      * @return int
      */
-    public function GetAccessToken(& $arrAccessTokenRet = [], & $sDesc = 'unknown error')
+    public function GetAccessToken(& $arrRet = [], & $sDesc = 'unknown error')
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
         $sAccessTokenUrl = sprintf( self::GET_ACCESS_TOKEN_BY_CODE_URL, $this->m_sAppId, $this->m_sAppSecret);
-        $arrAccessTokenRet = (array)json_decode(file_get_contents($sAccessTokenUrl), TRUE);
+        $arrRet = (array)json_decode(file_get_contents($sAccessTokenUrl), TRUE);
 
-        if( CLib::IsArrayWithKeys( $arrAccessTokenRet )
-            && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenRet, 'access_token',false,'') )
-        )
+        if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet, ["access_token"] ) )
         {
             $nErrCode = CConst::ERROR_SUCCESS;
             $sDesc = "get access token success ";
@@ -70,27 +68,23 @@ class GetAccessToken
     /**
      * get access token by code
      *
-     * If you want to see official return information, see parameters $arrAccessTokenRet
+     * If you want to see official return information, see parameters $arrRet
      *
      * @param string $sCode
-     * @param array $arrAccessTokenRet[ return access_token、refresh_token、openid ]
+     * @param array $arrRet[ return access_token、refresh_token、openid ]
      * @param string $sDesc
      * @return int
      */
-    public function GetAccessTokenByCode( $sCode = '', & $arrAccessTokenRet = [], & $sDesc = 'unknown error' )
+    public function GetAccessTokenByCode( $sCode = '', & $arrRet = [], & $sDesc = 'unknown error' )
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
         if( CLib::IsExistingString( $sCode )  )
         {
-           $sAccessTokenUrl = sprintf( self::GET_ACCESS_TOKEN_BY_CODE_URL, $this->m_sAppId, $this->m_sAppSecret, $sCode);
+            $sAccessTokenUrl = sprintf( self::GET_ACCESS_TOKEN_BY_CODE_URL, $this->m_sAppId, $this->m_sAppSecret, $sCode);
+            $arrRet = (array)json_decode( file_get_contents($sAccessTokenUrl), TRUE);
 
-            $arrAccessTokenRet = (array)json_decode( file_get_contents($sAccessTokenUrl), TRUE);
-
-            if( CLib::IsArrayWithKeys( $arrAccessTokenRet )
-                && CLib::IsExistingString(   CLib::GetVal( $arrAccessTokenRet, 'access_token',false,'') )
-                && CLib::IsExistingString(   CLib::GetVal( $arrAccessTokenRet, 'openid',false,'') )
-            )
+            if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet, ['access_token','openid'] ) )
             {
                 $nErrCode = CConst::ERROR_SUCCESS;
                 $sDesc = "get access token by code success";
@@ -113,28 +107,26 @@ class GetAccessToken
     /**
      * test access token is valid
      *
-     * If you want to see official return information, see parameters $arrAccessTokenRet
+     * If you want to see official return information, see parameters $arrRet
      *
      * @param $sAccessToken
      * @param $sOpenId
-     * @param array $arrAccessTokenRet
+     * @param array $arrRet
      * @param string $sDesc
      * @return int
      */
-    public function TestAccessTokenIsValid( $sAccessToken, $sOpenId, & $arrAccessTokenRet = [], & $sDesc = "unknown error" )
+    public function TestAccessTokenIsValid( $sAccessToken, $sOpenId, & $arrRet = [], & $sDesc = "unknown error" )
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
         if( CLib::IsExistingString( $sAccessToken ) || CLib::IsExistingString( $sOpenId ) )
         {
             $sIsValidAccessTokenUrl = sprintf( self::TEST_ACCESS_TOKEN_IS_VALID_URL, $sAccessToken, $sOpenId );
-            $arrAccessTokenRet = (array)json_decode(file_get_contents($sIsValidAccessTokenUrl), TRUE);
+            $arrRet = (array)json_decode(file_get_contents($sIsValidAccessTokenUrl), TRUE);
 
-            if( CLib::IsArrayWithKeys( $arrAccessTokenRet )
-                && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenRet, 'errmsg', false, '' ) )
-                && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenRet, 'errcode', false, '' ) )
-                && CLib::GetVal( $arrAccessTokenRet, 'errmsg', false, '' ) === "ok"
-                && CLib::GetVal( $arrAccessTokenRet, 'errcode', false, '' ) == 0
+            if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet, ["errmsg","errcode"] )
+                && CLib::GetVal( $arrRet, 'errmsg', false, '' ) === "ok"
+                && CLib::GetVal( $arrRet, 'errcode', false, '' ) == 0
             )
             {
                 $nErrCode = CConst::ERROR_SUCCESS;
@@ -158,26 +150,23 @@ class GetAccessToken
     /**
      * refresh access token
      *
-     * If you want to see official return information, see parameters $arrAccessTokenRet
+     * If you want to see official return information, see parameters $arrRet
      *
      * @param $sAccessToken
-     * @param array $arrAccessTokenRet
+     * @param array $arrRet
      * @param string $sDesc
      * @return int
      */
-    public function RefreshAccessToken( $sAccessToken, & $arrAccessTokenRet = [], & $sDesc = "unknown error" )
+    public function RefreshAccessToken( $sAccessToken, & $arrRet = [], & $sDesc = "unknown error" )
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
        if( CLib::IsExistingString( $sAccessToken ) )
        {
            $sRefreshTokenUrl =  sprintf( self::REFRESH_ACCESS_TOKEN_URL, $this->m_sAppId, $sAccessToken );
-           $arrAccessTokenRet = (array)json_decode(file_get_contents($sRefreshTokenUrl), TRUE);
+           $arrRet = (array)json_decode(file_get_contents($sRefreshTokenUrl), TRUE);
 
-           if( CLib::IsArrayWithKeys( $arrAccessTokenRet )
-               && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenRet, 'access_token',false,'') )
-               && CLib::IsExistingString( CLib::GetVal( $arrAccessTokenRet, 'openid',false,'') )
-           )
+           if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet, ["access_token", "openid"] ))
            {
                $nErrCode = CConst::ERROR_SUCCESS;
                $sDesc = "refresh access token success";

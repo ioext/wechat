@@ -37,4 +37,8 @@ class WeChatConst
     const SEND_TEMPLATE_MESSAGE_PARAM_ERROR         =   CConst::ERROR_USER_START + 13; //刷新access_token失败
     const SEND_TEMPLATE_MESSAGE_FAIL_ERROR          =   CConst::ERROR_USER_START + 13; //刷新access_token失败
 
+    //class GetWeChatServerIP
+    const GET_WE_CHAT_SERVER_IP_FAIL_ERROR          =   CConst::ERROR_USER_START + 13; //刷新access_token失败
+    const GET_WE_CHAT_SERVER_IP_PARAM_ERROR         =   CConst::ERROR_USER_START + 13; //刷新access_token失败
+
 }

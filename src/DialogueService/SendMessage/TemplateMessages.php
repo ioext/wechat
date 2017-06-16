@@ -110,7 +110,7 @@ class TemplateMessage
             $sUrl = sprintf( self::GET_INDUSTRY_INFO_URL, $sAccessToken );
             $arrRet = (array)json_decode( file_get_contents($sUrl), TRUE);
 
-            if( CLib::IsArrayWithKeys( $arrRet ) )
+            if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet, ["primary_industry","secondary_industry"] ) )
             {
                 $nErrCode = CConst::ERROR_SUCCESS;
                 $sDesc = "get industry info success";
@@ -209,7 +209,7 @@ class TemplateMessage
             $sUrl = sprintf( self::GET_TEMPLATE_LIST_URL, $sAccessToken );
             $arrRet = (array)json_decode( file_get_contents($sUrl), TRUE);
 
-            if( CLib::IsArrayWithKeys( $arrRet ) )
+            if( CLib::IsArrayWithKeys( $arrRet ) && CLib::IsArrayWithKeys( $arrRet,["template_list"] ) )
             {
                 $nErrCode = CConst::ERROR_SUCCESS;
                 $sDesc = "get template list success";
@@ -309,6 +309,7 @@ class TemplateMessage
         // pagepath	    是   所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar）
         // data	        是   模板数据
         //  注：url和miniprogram都是非必填字段，若都不传则模板无跳转；若都传，会优先跳转至小程序。开发者可根据实际需要选择其中一种跳转方式即可。当用户的微信客户端版本不支持跳小程序时，将会跳转至url。
+
         $nErrCode = CConst::ERROR_UNKNOWN;
 
         if( CLib::IsArrayWithKeys( $arrInputData )
