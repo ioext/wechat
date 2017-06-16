@@ -10,12 +10,17 @@ class GetWeChatServerIP
     //获取微信服务器ip地址
     const GET_WE_CHAT_SERVER_IP_URL = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=%s";
 
-    public function __construct()
-    {
+    public function __construct(){}
 
-    }
-
-    public function GetWeChatServerIp( $sAccessToken, & $arrRet = [], $sDesc = '' )
+    /**
+     * 获取微信服务器IP地址
+     *
+     * @param $sAccessToken
+     * @param array $arrRet
+     * @param string $sDesc
+     * @return int
+     */
+    public function GetWeChatServerIp( $sAccessToken, & $arrRet = [], & $sDesc = '' )
     {
         $nErrCode = CConst::ERROR_UNKNOWN;
 
