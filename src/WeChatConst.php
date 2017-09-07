@@ -41,6 +41,10 @@ class WeChatConst
     const GET_WE_CHAT_SERVER_IP_FAIL_ERROR          =   CConst::ERROR_USER_START + 13; //获取微信服务器IP参数错误
     const GET_WE_CHAT_SERVER_IP_PARAM_ERROR         =   CConst::ERROR_USER_START + 13; //获取微信服务器IP失败
 
+    //class WebAuthorizeAccessToUserInfo
+    const GET_STATES_PARAM_ERROR         =   CConst::ERROR_USER_START + 13; //获取微信服务器IP失败
+    const GET_STATES_FAIL_ERROR         =   CConst::ERROR_USER_START + 13; //获取微信服务器IP失败
+
 
 
 }
