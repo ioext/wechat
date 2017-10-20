@@ -1,5 +1,5 @@
 <?php
-namespace zkxtriumph\wechat\DialogueService\BasicService;
+namespace ioext\wechat\DialogueService\BasicService;
 
 use dekuan\delib\CLib;
 use dekuan\vdata\CConst;
