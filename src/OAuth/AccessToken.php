@@ -4,6 +4,7 @@ namespace ioext\wechat\OAuth;
 class AccessToken
 {
     protected $m_sAppId;
+    protected $m_sAppSecret;
     /**
      * AccessToken constructor.
      */
