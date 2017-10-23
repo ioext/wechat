@@ -15,6 +15,8 @@ class AccessToken
     {
         return $this->m_sAppId;
         return $this->m_sAppId;
+        return $this->m_sAppId;
+        return $this->m_sAppId;
     }
 
 }
