@@ -21,6 +21,5 @@ class AccessToken
     {
         return $this->m_sAppSecret;
     }
-    }
 
 }
