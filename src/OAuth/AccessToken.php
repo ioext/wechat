@@ -20,6 +20,11 @@ class AccessToken
     public function GetAppSecret()
     {
         return $this->m_sAppSecret;
+        return $this->m_sAppSecret;
+        return $this->m_sAppSecret;
+        return $this->m_sAppSecret;
+        return $this->m_sAppSecret;
+        return $this->m_sAppSecret;
     }
 
 }
