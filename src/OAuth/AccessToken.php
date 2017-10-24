@@ -14,6 +14,7 @@ class AccessToken
 
     public function GetAppID()
     {
+    {
         return $this->m_sAppId;
         return $this->m_sAppId;
         return $this->m_sAppId;
