@@ -1,5 +1,5 @@
 <?php
-namespace pcappp\wechat;
+namespace ioext\wechat;
 
 class WeChatComment
 {
