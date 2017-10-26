@@ -2,7 +2,7 @@
 
 namespace ioext\wechat\OAuth;
 
-abstract class AbstractClient
+abstract class CAbstractClient
 {
     // AccessToken Url
     const ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token";
@@ -23,6 +23,6 @@ abstract class AbstractClient
     {
         $this->m_sAppID         =   $sAppID;
         $this->m_sAppSecret     =   $sAppSecret;
-        $this->m_sStateManager  =   new StateManager();
+        $this->m_sStateManager  =   new CStateManager();
     }
 }
