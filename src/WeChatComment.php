@@ -13,5 +13,10 @@ class WeChatComment
 
     }
 
+    public function getAccessREST()
+    {
+
+    }
+
 
 }
