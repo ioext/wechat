@@ -8,5 +8,10 @@ class WeChatComment
 
     }
 
+    public function getAccessCODE()
+    {
+
+    }
+
 
 }
