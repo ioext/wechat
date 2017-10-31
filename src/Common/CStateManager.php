@@ -16,6 +16,9 @@ class CStateManager
     public function SetState()
     {
         if( true )
+        if( true )
+        if( true )
+        if( true )
         {
 
         }
