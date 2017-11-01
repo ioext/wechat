@@ -68,7 +68,14 @@ class CStateManager
 
     public function RemoveState()
     {
+        if (!$this->isSessionStarted)
+        {
+            $this->startSession();
+        }
 
+        if ($this->hasState()) {
+            unset($_SESSION[$this->namespace]);
+        }
     }
 
     /**
