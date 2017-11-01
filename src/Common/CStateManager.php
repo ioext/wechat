@@ -98,7 +98,6 @@ class CStateManager
             {
                 $bRet = true;
             }
-            $bRet = $sState === $this->GetState();
         }
 
         return $bRet;
