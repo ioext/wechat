@@ -41,7 +41,7 @@ class CStateManager
      * @param $sState
      * @return null|string
      */
-    public function GetState( $sState )
+    public function GetState()
     {
         if( ! $this->m_bIsSessionStarted )
         {
@@ -80,6 +80,28 @@ class CStateManager
         {
             unset($_SESSION[$this->m_sNameSpace]);
         }
+    }
+
+    /**
+     * 验证state
+     *
+     * @param $sState
+     * @return bool
+     */
+    public function IsValidState( $sState )
+    {
+        $bRet = false;
+
+        if ( $this->HasState() )
+        {
+            if( $sState === $this->GetState( $sState ) $this->GetState() )
+            {
+
+            }
+            $bRet = $sState === $this->GetState();
+        }
+
+        return $bRet;
     }
 
     /**
