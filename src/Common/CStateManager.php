@@ -66,15 +66,19 @@ class CStateManager
         return isset($_SESSION[$this->m_sNameSpace]);
     }
 
+    /**
+     * remove state
+     */
     public function RemoveState()
     {
-        if (!$this->isSessionStarted)
+        if ( ! $this->m_bIsSessionStarted )
         {
-            $this->startSession();
+            $this->StartSession();
         }
 
-        if ($this->hasState()) {
-            unset($_SESSION[$this->namespace]);
+        if ( $this->HasState() )
+        {
+            unset($_SESSION[$this->m_sNameSpace]);
         }
     }
 
