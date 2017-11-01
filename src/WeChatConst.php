@@ -1,5 +1,5 @@
 <?php
-namespace zkxtriumph\wechat;
+namespace ioext\wechat;
 
 use dekuan\vdata\CConst;
 
