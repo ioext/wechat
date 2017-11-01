@@ -94,7 +94,7 @@ class CStateManager
 
         if ( $this->HasState() )
         {
-            if( $sState === $this->GetState( $sState ) $this->GetState() )
+            if( $sState === $this->GetState(  ) $this->GetState() )
             {
 
             }
