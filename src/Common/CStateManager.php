@@ -4,21 +4,83 @@ namespace ioext\wechat\Common;
 
 class CStateManager
 {
-    const SESSION_SIGN  = "IoextOauthState";
+    const SESSION_SIGN  = "ioext_oauth_state";
 
-    private  $m_sSessionSign;
+    private  $m_bIsSessionStarted = false;
 
-    public function __construct( $sSessionSign = self::SESSION_SIGN )
+    private  $m_sNameSpace;
+
+    /**
+     * CStateManager constructor.
+     * @param $sNameSpace
+     */
+    public function __construct( $sNameSpace = self::SESSION_SIGN )
     {
-        $this->m_sSessionSign = $sSessionSign;
+        $this->m_sNameSpace = $sNameSpace;
     }
 
-    public function SetState()
+    /**
+     * 设置state存入session
+     *
+     * @param $sState
+     */
+    public function SetState( $sState )
     {
-        if( true )
+        if( ! $this->m_bIsSessionStarted )
         {
-
+            $this->StartSession();
         }
-        return ;
+
+        $_SESSION[$this->m_sNameSpace] = (string) $sState;
+
+    }
+
+    /**
+     * 获取state
+     *
+     * @param $sState
+     * @return null|string
+     */
+    public function GetState( $sState )
+    {
+        if( ! $this->m_bIsSessionStarted )
+        {
+            $this->StartSession();
+        }
+
+        return $this->HasState() ? ( string ) $_SESSION[$this->m_sNameSpace] : null;
+    }
+
+    /**
+     * 检测是否有state
+     *
+     * @return bool
+     */
+    public function HasState()
+    {
+        if (!$this->m_bIsSessionStarted)
+        {
+            $this->StartSession();
+        }
+
+        return isset($_SESSION[$this->m_sNameSpace]);
+    }
+
+    public function RemoveState()
+    {
+
+    }
+
+    /**
+     * open session
+     */
+    public function StartSession()
+    {
+        if( PHP_SESSION_NONE == session_start() )
+        {
+            session_start();
+        }
+
+        $this->m_bIsSessionStarted = true;
     }
 }
