@@ -29,7 +29,19 @@ abstract class CAbstractClient
         $this->mc_sStateManager  =   new CStateManager();
     }
 
+    /**
+     * 授权作用域
+     *
+     * @return mixed
+     */
     abstract public function ResolveScope();
+
+    /**
+     * 授权接口地址
+     *
+     * @return mixed
+     */
+    abstract public function ResolveAuthorizeUrl();
 
     public function SetScope( $sScope )
     {
