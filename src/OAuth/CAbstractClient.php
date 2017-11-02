@@ -15,7 +15,7 @@ abstract class CAbstractClient
 
     protected $m_sState;
 
-    protected $m_sRedirectUrl;
+    protected $m_sRedirectUri;
 
     protected $m_sStateManager;
 
@@ -36,8 +36,8 @@ abstract class CAbstractClient
         $this->m_sState = $sState;
     }
 
-    public function SetRedirectUri()
+    public function SetRedirectUri( $sRedirectUrl )
     {
-
+        $this->m_sRedirectUri = $sRedirectUrl;
     }
 }
