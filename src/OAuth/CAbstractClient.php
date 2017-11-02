@@ -49,5 +49,7 @@ abstract class CAbstractClient
         {
             $this->m_sState = Common::GetRandomString( 16 );
         }
+
+        $this->mc_sStateManager->SetState( $this->m_sState );
     }
 }
