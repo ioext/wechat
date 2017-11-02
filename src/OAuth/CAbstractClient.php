@@ -30,4 +30,9 @@ abstract class CAbstractClient
     {
         $this->m_sScope = $sScope;
     }
+
+    public function SetState()
+    {
+
+    }
 }
