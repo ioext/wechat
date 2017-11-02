@@ -54,7 +54,7 @@ abstract class CAbstractClient
         $this->mc_sStateManager->SetState( $this->m_sState );
 
         $arrQuery = [
-
+            'appid'     => $this->m_sAppID;
         ];
     }
 }
