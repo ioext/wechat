@@ -29,6 +29,8 @@ abstract class CAbstractClient
         $this->mc_sStateManager  =   new CStateManager();
     }
 
+    abstract public function ResolveScope();
+
     public function SetScope( $sScope )
     {
         $this->m_sScope = $sScope;
@@ -54,7 +56,13 @@ abstract class CAbstractClient
         $this->mc_sStateManager->SetState( $this->m_sState );
 
         $arrQuery = [
-            'appid'     => $this->m_sAppID;
+            'appid'         =>  $this->m_sAppID,
+            'redirect_uri'  =>  $this->m_sRedirectUri ?: Common::GetCurrentUrl(),
+            'scope'         =>  $this->ResolveScope(),
+            'state'         =>  $this->m_sState,
+            'response_type' =>  'code'
         ];
     }
+
+
 }
