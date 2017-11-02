@@ -98,6 +98,13 @@ abstract class CAbstractClient
         return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
     }
 
+    /**
+     * 通过code获得access token
+     *
+     * @param $sCode
+     * @param null $sState
+     * @throws \Exception
+     */
     public function GetAccessToken( $sCode, $sState = null )
     {
         if( null ===  $sState && ! isset( $_GET['state'] ) )
@@ -119,7 +126,7 @@ abstract class CAbstractClient
             'grant_type'    =>  'authorization_code',
         ];
 
-//        $arrResponse
+        $arrResponse =
     }
 
 
