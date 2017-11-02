@@ -114,6 +114,9 @@ abstract class CAbstractClient
 
         $arrQuery = [
             'appid'     =>  $this->m_sAppID,
+            'secret'    =>  $this->m_sAppSecret,
+            'code'      =>  $sCode,
+
         ];
     }
 
