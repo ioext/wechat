@@ -53,16 +53,31 @@ abstract class CAbstractClient
         $this->m_sScope = $sScope;
     }
 
+    /**
+     * 设置state
+     *
+     * @param $sState
+     */
     public function SetState( $sState )
     {
         $this->m_sState = $sState;
     }
 
+    /**
+     * 设置redirectUri
+     *
+     * @param $sRedirectUrl
+     */
     public function SetRedirectUri( $sRedirectUrl )
     {
         $this->m_sRedirectUri = $sRedirectUrl;
     }
 
+    /**
+     * 获取authorizeUrl
+     *
+     * @return string
+     */
     public function GetAuthorizeUrl()
     {
         if( null === $this->m_sState )
