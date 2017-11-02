@@ -43,6 +43,11 @@ abstract class CAbstractClient
      */
     abstract public function ResolveAuthorizeUrl();
 
+    /**
+     * 设置scope
+     *
+     * @param $sScope
+     */
     public function SetScope( $sScope )
     {
         $this->m_sScope = $sScope;
@@ -74,6 +79,8 @@ abstract class CAbstractClient
             'state'         =>  $this->m_sState,
             'response_type' =>  'code'
         ];
+
+        return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
     }
 
 
