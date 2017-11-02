@@ -40,4 +40,9 @@ abstract class CAbstractClient
     {
         $this->m_sRedirectUri = $sRedirectUrl;
     }
+
+    public function GetAuthorizeUrl()
+    {
+
+    }
 }
