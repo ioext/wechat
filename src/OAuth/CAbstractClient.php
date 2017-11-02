@@ -28,6 +28,6 @@ abstract class CAbstractClient
 
     public function SetScope( $sScope )
     {
-
+        $this->m_sScope = $sScope;
     }
 }
