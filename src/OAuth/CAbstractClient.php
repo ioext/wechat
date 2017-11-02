@@ -107,8 +107,11 @@ abstract class CAbstractClient
 
         $sState = $sState ? : $_GET['state'];
 
-        if( $this->mc_sStateManager->IsValidState( $sState ))
-        {}
+        if( ! $this->mc_sStateManager->IsValidState( $sState ))
+        {
+            throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
+        }
+
     }
 
 
