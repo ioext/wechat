@@ -2,6 +2,8 @@
 
 namespace ioext\wechat\OAuth;
 
+use ioext\wechat\Common\Common;
+
 abstract class CAbstractClient
 {
     // AccessToken Url
@@ -45,7 +47,7 @@ abstract class CAbstractClient
     {
         if( null === $this->m_sState )
         {
-            $this->m_sState =
+            $this->m_sState = Common::GetRandomString( 16 );
         }
     }
 }
