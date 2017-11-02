@@ -113,7 +113,7 @@ abstract class CAbstractClient
         }
 
         $arrQuery = [
-
+            'appid'     =>  $this->m_sAppID,
         ];
     }
 
