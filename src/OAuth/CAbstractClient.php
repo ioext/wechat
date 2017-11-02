@@ -33,6 +33,6 @@ abstract class CAbstractClient
 
     public function SetState( $sState )
     {
-
+        $this->m_sState = $sState;
     }
 }
