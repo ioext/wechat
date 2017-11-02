@@ -10,5 +10,7 @@ class Common
     public static function GetRandomString( $nLength = 10 )
     {
         $sPool = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        return substr(str_shuffle(str_repeat($sPool, ceil($nLength / strlen($sPool)))), 0, $nLength);
     }
 }
