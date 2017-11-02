@@ -116,7 +116,7 @@ abstract class CAbstractClient
             'appid'     =>  $this->m_sAppID,
             'secret'    =>  $this->m_sAppSecret,
             'code'      =>  $sCode,
-
+            'grant_type'    =>  'authorization_code',
         ];
     }
 
