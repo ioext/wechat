@@ -1,5 +1,5 @@
 <?php
-namespace pcappp\wechat\Common;
+namespace ioext\wechat\Common;
 
 
 class Http
