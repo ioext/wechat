@@ -17,13 +17,13 @@ abstract class CAbstractClient
 
     protected $m_sRedirectUri;
 
-    protected $m_sStateManager;
+    protected $mc_sStateManager;
 
     public function __construct( $sAppID, $sAppSecret )
     {
         $this->m_sAppID         =   $sAppID;
         $this->m_sAppSecret     =   $sAppSecret;
-        $this->m_sStateManager  =   new CStateManager();
+        $this->mc_sStateManager  =   new CStateManager();
     }
 
     public function SetScope( $sScope )
@@ -45,7 +45,7 @@ abstract class CAbstractClient
     {
         if( null === $this->m_sState )
         {
-
+            $this->m_sState =
         }
     }
 }
