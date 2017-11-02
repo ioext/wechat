@@ -3,6 +3,7 @@
 namespace ioext\wechat\OAuth;
 
 use ioext\wechat\Common\Common;
+use ioext\wechat\Common\CStateManager;
 
 abstract class CAbstractClient
 {
@@ -51,5 +52,9 @@ abstract class CAbstractClient
         }
 
         $this->mc_sStateManager->SetState( $this->m_sState );
+
+        $arrQuery = [
+
+        ];
     }
 }
