@@ -26,7 +26,7 @@ abstract class CAbstractClient
         $this->m_sStateManager  =   new CStateManager();
     }
 
-    public function SetScope()
+    public function SetScope( $sScope )
     {
 
     }
