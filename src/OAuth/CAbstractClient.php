@@ -98,5 +98,17 @@ abstract class CAbstractClient
         return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
     }
 
+    public function GetAccessToken( $sCode, $sState = null )
+    {
+        if( null ===  $sState && ! isset( $_GET['state'] ) )
+        {
+            throw new \Exception('Invalid Request');
+        }
+
+        $sState = $sState ? : $_GET['state'];
+
+        if( $this->mc_sStateManager )
+    }
+
 
 }
