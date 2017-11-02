@@ -4,6 +4,7 @@ namespace ioext\wechat\OAuth;
 
 use ioext\wechat\Common\Common;
 use ioext\wechat\Common\CStateManager;
+use ioext\wechat\Common\Http;
 
 abstract class CAbstractClient
 {
@@ -126,7 +127,16 @@ abstract class CAbstractClient
             'grant_type'    =>  'authorization_code',
         ];
 
-        $arrResponse =
+        $arrResponse = Http::request( 'GET', static::ACCESS_TOKEN_URL )
+            ->withQuery( $arrQuery )
+            ->send();
+
+        if( 0 != $arrResponse['errcode'] )
+        {
+            throw new \Exception( $arrResponse['errmsg'], $arrResponse['errcode'] );
+        }
+
+        return new AccessToken( $this->m_sAppID, $arrResponse );
     }
 
 
