@@ -35,4 +35,9 @@ abstract class CAbstractClient
     {
         $this->m_sState = $sState;
     }
+
+    public function SetRedirectUri()
+    {
+
+    }
 }
