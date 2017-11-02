@@ -25,4 +25,9 @@ abstract class CAbstractClient
         $this->m_sAppSecret     =   $sAppSecret;
         $this->m_sStateManager  =   new CStateManager();
     }
+
+    public function SetScope()
+    {
+
+    }
 }
