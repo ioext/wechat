@@ -43,6 +43,9 @@ abstract class CAbstractClient
 
     public function GetAuthorizeUrl()
     {
+        if( null === $this->m_sState )
+        {
 
+        }
     }
 }
