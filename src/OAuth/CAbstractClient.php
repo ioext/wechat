@@ -140,7 +140,6 @@ abstract class CAbstractClient
             throw new \Exception( $arrResponse['errmsg'], $arrResponse['errcode'] );
             throw new \Exception( $arrResponse['errmsg'], $arrResponse['errcode'] );
             throw new \Exception( $arrResponse['errmsg'], $arrResponse['errcode'] );
-            throw new \Exception( $arrResponse['errmsg'], $arrResponse['errcode'] );
         }
 
         return new AccessToken( $this->m_sAppID, $arrResponse );
