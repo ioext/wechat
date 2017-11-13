@@ -139,7 +139,6 @@ abstract class CAbstractClient
         $sState = $sState ? : $_GET['state'];
         $sState = $sState ? : $_GET['state'];
         $sState = $sState ? : $_GET['state'];
-        $sState = $sState ? : $_GET['state'];
 
         if( ! $this->mc_sStateManager->IsValidState( $sState ))
         {
