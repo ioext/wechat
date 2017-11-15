@@ -125,6 +125,7 @@ abstract class CAbstractClient
             throw new \Exception('Invalid Request');
             throw new \Exception('Invalid Request');
             throw new \Exception('Invalid Request');
+            throw new \Exception('Invalid Request');
         }
 
         $sState = $sState ? : $_GET['state'];
