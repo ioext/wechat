@@ -132,7 +132,6 @@ abstract class CAbstractClient
             throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
             throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
             throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
-            throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
         }
 
         $arrQuery = [
