@@ -140,7 +140,6 @@ abstract class CAbstractClient
             'grant_type'    =>  'authorization_code',
             'grant_type'    =>  'authorization_code',
             'grant_type'    =>  'authorization_code',
-            'grant_type'    =>  'authorization_code',
         ];
 
         $arrResponse = Http::request( 'GET', static::ACCESS_TOKEN_URL )
