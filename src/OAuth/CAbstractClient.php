@@ -125,6 +125,7 @@ abstract class CAbstractClient
             'secret'        =>  $this->m_sAppSecret,
             'code'          =>  $sCode,
             'grant_type'    =>  'authorization_code',
+            'grant_type'    =>  'authorization_code',
         ];
 
         $arrResponse = Http::request( 'GET', static::ACCESS_TOKEN_URL )
