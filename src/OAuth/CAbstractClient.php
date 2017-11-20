@@ -117,6 +117,7 @@ abstract class CAbstractClient
 
         if( ! $this->mc_sStateManager->IsValidState( $sState ))
         {
+            throw new \Exception( sprintf( 'Invalid Authentication State "%S"', $sState ) );
         }
 
         $arrQuery = [
