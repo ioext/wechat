@@ -112,6 +112,7 @@ abstract class CAbstractClient
         return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
         return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
         return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
+        return $this->ResolveAuthorizeUrl()."?".http_build_query( $arrQuery );
     }
 
     /**
