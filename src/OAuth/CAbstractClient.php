@@ -106,7 +106,6 @@ abstract class CAbstractClient
      * @param null $sState
      * @throws \Exception
      */
-     */
     public function GetAccessToken( $sCode, $sState = null )
     public function GetAccessToken( $sCode, $sState = null )
     public function GetAccessToken( $sCode, $sState = null )
