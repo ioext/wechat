@@ -120,6 +120,7 @@ etAccessToken( $sCode, $sState = null )
     public function GetAccessToken( $sCode, $sState = null )
     public function GetAccessToken( $sCode, $sState = null )
     public function GetAccessToken( $sCode, $sState = null )
+    public function GetAccessToken( $sCode, $sState = null )
     {
         if( null ===  $sState && ! isset( $_GET['state'] ) )
         {
